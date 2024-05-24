@@ -35,7 +35,7 @@ public class BookController {
         if (list.size()<=0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.of(Optional.of(list));
+        return ResponseEntity.status(HttpStatus.CREATED).body(list);
     }
 
     // get single book handler
@@ -50,11 +50,18 @@ public class BookController {
         return ResponseEntity.of(Optional.of(book));
     }
 
-    // Set single book handler
+    // // Set single book handler
+    // @PostMapping("/book")
+    // public Book addBook(@RequestBody Book book) {
+    //     Book b = this.bookService.addBook(book);
+    //     return b;
+    // }
+    
+    //Set Multiple book
     @PostMapping("/book")
-    public Book addBook(@RequestBody Book book) {
-        Book b = this.bookService.addBook(book);
-        return b;
+    public List<Book> addAllBook(@RequestBody List<Book> list) {
+        List<Book> book = this.bookService.addBook(list);
+        return book;
     }
 
     // Delet book handler
